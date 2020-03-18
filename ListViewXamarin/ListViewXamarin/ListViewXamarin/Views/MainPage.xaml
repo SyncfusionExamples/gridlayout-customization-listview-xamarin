@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ListViewXamarin"
+             xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:dataSource="clr-namespace:Syncfusion.DataSource;assembly=Syncfusion.DataSource.Portable"
+             x:Class="ListViewXamarin.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:ContactsViewModel x:Name="viewModel"/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Behaviors>
+        <local:Behavior/>
+    </ContentPage.Behaviors>
+    
+    <ContentPage.Content>
+        <listView:SfListView x:Name="listView" Margin="{OnPlatform iOS='0,40,0,0'}"
+                             GroupHeaderSize="0" BackgroundColor="LightGray"
+                             ItemSize="50" 
+                             ItemsSource="{Binding contactsinfo}" >
+
+            <listView:SfListView.DataSource>
+                <dataSource:DataSource>
+                    <dataSource:DataSource.GroupDescriptors>
+                        <dataSource:GroupDescriptor PropertyName="CountryName"/>
+                    </dataSource:DataSource.GroupDescriptors>
+                </dataSource:DataSource>
+            </listView:SfListView.DataSource>
+
+            <listView:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <StackLayout>
+                                <Label Text="{Binding ContactName}" FontAttributes="Bold" FontSize="Medium"/>
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </listView:SfListView.ItemTemplate>
+
+        </listView:SfListView>
+    </ContentPage.Content>
+</ContentPage>
